@@ -87,18 +87,18 @@ def splitCSV(request):
                     index += 1
 
                 # live server
-                # fs = folder_name.split("/")[-1]
+                fs = folder_name.split("/")[-1]
                 # local host
-                fs = folder_name.split("\\")[-1]
+                # fs = folder_name.split("\\")[-1]
                 outputfile = str(settings.MEDIA_ROOT) + f"/{fs}"
                 
                 shutil.make_archive(outputfile, 'zip', folder_name)
                 shutil.rmtree(folder_name)
                 zip_file_name = f"{fs}.zip"
                 #local host
-                zip_file = f"/{outputfile}.zip"
+                # zip_file = f"/{outputfile}.zip"
                 # live server
-                # zip_file = f"/{outputfile.split('/')[-1]}.zip"
+                zip_file = f"/{outputfile.split('/')[-1]}.zip"
                 file= File.objects.create(user=request.user, file_size = model_file_size, file_name=zip_file_name, zip_file=zip_file)
                 file.save()
                 os.remove(file_path)
@@ -163,18 +163,18 @@ def splitJSON(request):
                 json.dump(split_data[i], outfile, indent=4)
 
         # live server
-        # fs = folder_name.split("/")[-1]
+        fs = folder_name.split("/")[-1]
         # local host
-        fs = folder_name.split("\\")[-1]
+        # fs = folder_name.split("\\")[-1]
         outputfile = str(settings.MEDIA_ROOT) + f"/{fs}"
         
         shutil.make_archive(outputfile, 'zip', folder_name)
         shutil.rmtree(folder_name)
         zip_file_name = f"{fs}.zip"
         #local host
-        zip_file = f"/{outputfile}.zip"
+        # zip_file = f"/{outputfile}.zip"
         # live server
-        # zip_file = f"/{outputfile.split('/')[-1]}.zip"
+        zip_file = f"/{outputfile.split('/')[-1]}.zip"
         file= File.objects.create(user=request.user, file_name=zip_file_name, zip_file=zip_file)
         file.save()
         os.remove(file_path)
