@@ -33,7 +33,7 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['bytsfy.herokuapp.com', "127.0.0.1"]
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'allauth', # new
     'allauth.account', # new
     'widget_tweaks',    # new
+
 ]
 
 AUTH_USER_MODEL = "accounts.User"  # use our customuser
@@ -75,6 +76,7 @@ AUTHENTICATION_BACKENDS = (
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -112,22 +114,22 @@ WSGI_APPLICATION = "bytsfy.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dbsf8ljkp72lt7',
-        'USER': 'puyjiyhkdwaqaj',
-        'PORT': '5432',
-        'PASSWORD': 'f7f23528fda176c46952ec35eb3eebf74734e69c87a32150b87cd9c20c597420',
-        'HOST': 'ec2-52-86-115-245.compute-1.amazonaws.com',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'dbsf8ljkp72lt7',
+#         'USER': 'puyjiyhkdwaqaj',
+#         'PORT': '5432',
+#         'PASSWORD': 'f7f23528fda176c46952ec35eb3eebf74734e69c87a32150b87cd9c20c597420',
+#         'HOST': 'ec2-52-86-115-245.compute-1.amazonaws.com',
+#     }
+# }
 
 
 # Password validation
@@ -212,6 +214,5 @@ SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config('SOCIAL_AUTH_GOOGLE_OAUTH2_KEY')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config('SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET')
-
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
